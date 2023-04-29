@@ -1,0 +1,44 @@
+{% extends 'marco.html' %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+            <!-- Header-->
+            <header class="bg-dark py-5" style="height: 100vh; margin: 0;">
+                <div class="container px-5">
+                    <div class="row gx-5 align-items-center justify-content-center">
+                        <div class="col-lg-8 col-xl-7 col-xxl-6">
+                            <div class="my-5 text-center text-xl-start">
+                                <form action="{% url 'confirmaturno' %}" method="POST">{% csrf_token %}
+                                    <h1 class="display-6 fw-bolder text-white mb-2">Solicitud de turno</h1>
+                                    <p class="lead fw-normal text-white-50 mb-4">Complete los datos a continuación</p>
+                                    <div class="flex-column justify-content-sm-center justify-content-xl-start">
+                                        <div class="input-group mb-2">
+                                            <input class="form-control" type="text" placeholder="Fecha turno (DD/MM/AAAA)" aria-label="Email address..." aria-describedby="button-newsletter" name="fecha"  />
+                                        </div>
+                                        <div class="input-group mb-2">
+                                            <input class="form-control" type="text" placeholder="Nombre" aria-label="Email address..." aria-describedby="button-newsletter" name="nombre"/>
+                                        </div>
+                                        <div class="input-group mb-2">
+                                            <input class="form-control" type="text" placeholder="Apellido" aria-label="Email address..." aria-describedby="button-newsletter" name="apellido"/>
+                                        </div>
+                                        <div class="input-group mb-2">
+                                            <input class="form-control" type="text" placeholder="Telefono" aria-label="Email address..." aria-describedby="button-newsletter" name="telefono"/>
+                                        </div>
+                                        <div class="input-group mb-2">
+                                            <input class="form-control" type="text" placeholder="Vehículo (Marca, Modelo)" aria-label="Email address..." aria-describedby="button-newsletter" name="vehiculo" />
+                                        </div>
+                                        <div class="input-group mb-2">
+                                            <input class="form-control" type="text" placeholder="Comeratio" aria-label="Email address..." aria-describedby="button-newsletter" name="comentario"/>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-lg px-4 me-sm-3"> Continuar</button>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/vw-golf-r-05-1620312876.jpg" alt="..." /></div>
+                    </div>
+                </div>
+            </header>
+
+{% endblock contenidoQueCambia %}
