@@ -7,7 +7,8 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
-from django.contrib.auth.models import User
+from django.views.generic.detail import DetailView
+from django.contrib.auth.decorators import login_required
 
 def inicio(self):
 
@@ -46,7 +47,7 @@ def reserva(self): # Revisar la multiplicidad de guardados
             data = miTurno.cleaned_data
             turno = Turno(fecha=data['fecha'], nombre=data['nombre'], apellido=data['apellido'], email=data['email'], telefono=data['telefono'], vehiculo=data['vehiculo'], comentario=data['comentario'])
             turno.save()   
-            return render(self, "confirmaTurno.html")   
+            return render(self, "confirmaTurno.html", {"nro_turno": turno.id})   
         else:          
             return render(self, "inicio.html", {"mensaje": "Formulario invalido"})    
     else:
@@ -54,6 +55,9 @@ def reserva(self): # Revisar la multiplicidad de guardados
         return render(self, "reservaturno.html", {"miTurno": miTurno})
     
 def register(request):
+    
+    print('method: ', request.method)
+    print('post: ', request.POST)
   
     if request.method == 'POST':
         miFormulario = UserCreationForm(request.POST)
@@ -90,10 +94,10 @@ def loginView(request):
                 return render(request, 'confirmaLogin.html')
             
             else:
-                return render(request, 'novedades.html', {"mensaje": f'Error: datos incorrectos'})
+                return render(request, 'inicio.html', {"mensaje": f'Error: datos incorrectos'})
             
         else:
-            return render(request, "servicios.html", {"mensaje": "Formulario invalido"})
+            return render(request, "inicio.html", {"mensaje": "Formulario invalido"})
     else:
         miFormulario = AuthenticationForm()
         return render(request, "loginRegistro.html", {"miFormulario": miFormulario})
@@ -102,12 +106,14 @@ def conf_ingreso(self):
 
     return render(self,"confirmaLogin.html")
 
-def vista_user(self):
+@login_required
+def VistaTurno(request):
+    email = request.user.email
+    turnos = Turno.objects.filter(email=email)
+    return render(request, 'user.html', {'turnos': turnos})
 
-    return render(self,"user.html")
+class DetalleTurno(DetailView):
 
-class VistaTurno (LoginRequiredMixin, ListView):
-  
-  model = Turno
-  template_name = 'user.html'
-  context_object_name = 'turno'
+    model = Turno
+    template_name = 'userTurnoDetail.html'
+    context_object_name = 'turno'

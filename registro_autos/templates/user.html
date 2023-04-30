@@ -12,15 +12,10 @@
                                 <h1 class="display-6 fw-bolder text-white mb-2">Bienvenido/a</h1>
                                 <p class="lead fw-normal text-white-50 mb-4">Tus turnos</p>
                                 <ul>
-                                    {% for i in turno %}
-                                      <li>
-                                        <a href="{% url 'DetalleTurno' i.email %}">
-                                          {{ i }}
-                                        </a>
-                                      </li>
-                                      </div>
-                                    {% endfor %}
-                                  </ul>
+                                {% for turno in turnos %}
+                                  <li><a href="{% url 'detalleturno' turno.pk %}">{{ turno.fecha }} - {{ turno.nombre }} {{ turno.apellido }}</a></li>
+                                {% endfor %}
+                                </ul>
                             </div>
                         </div>
                     </div>
