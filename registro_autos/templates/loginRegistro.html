@@ -1,0 +1,53 @@
+{% extends 'marco.html' %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+            <!-- Header-->
+            <header class="bg-dark py-5" style="height: 110vh; margin: 0;">
+                <div class="container px-5">
+                    <div class="row gx-5 align-items-center justify-content-center">
+                        <div class="col-lg-8 col-xl-7 col-xxl-6">                           
+                                <form action="{% url 'login' %}" method="POST">{% csrf_token %}
+                                    <h1 class="display-6 fw-bolder text-white mb-2">Ingresar</h1>
+                                    <div class="flex-column justify-content-sm-center justify-content-xl-start">
+                                        <div class="input-group mb-2">
+                                            <input class="form-control" type="text" placeholder="Usuario..." aria-label="Email address..." aria-describedby="button-newsletter" name="username"  />
+                                        </div>
+                                        <div class="input-group mb-2">
+                                            <input class="form-control" type="text" placeholder="Contraseña..." aria-label="Email address..." aria-describedby="button-newsletter" name="password"/>
+                                        </div>                                        
+                                        <button type="submit" class="btn btn-primary btn-lg px-4 me-sm-3"> Iniciar sesión</button>
+                                </form><br><br><br>       
+                                <form action="{% url 'registro' %}" method="POST">{% csrf_token %}
+                                    <h1 class="display-6 fw-bolder text-white mb-2">Crear usuario</h1>
+                                    <div class="flex-column justify-content-sm-center justify-content-xl-start">
+                                        <div class="input-group mb-2">
+                                            <input class="form-control" type="text" placeholder="Usuario..." aria-label="Email address..." aria-describedby="button-newsletter" name="username"/>
+                                        </div>
+                                        <div class="input-group mb-2">
+                                            <input class="form-control" type="text" placeholder="Contraseña..." aria-label="Email address..." aria-describedby="button-newsletter" name="password1"/>
+                                        </div>
+                                        <div class="input-group mb-2">
+                                            <input class="form-control" type="text" placeholder="Confirma contraseña..." aria-label="Email address..." aria-describedby="button-newsletter" name="password2"/>
+                                        </div>  
+                                        <div class="input-group mb-2">
+                                            <input class="form-control" type="text" placeholder="E-mail" aria-label="Email address..." aria-describedby="button-newsletter" name="email"/>
+                                        </div>   
+                                        <div class="input-group mb-2">
+                                            <input class="form-control" type="text" placeholder="Nombre..." aria-label="Email address..." aria-describedby="button-newsletter" name="first_name"/>
+                                        </div>      
+                                        <div class="input-group mb-2">
+                                            <input class="form-control" type="text" placeholder="Apellido..." aria-label="Email address..." aria-describedby="button-newsletter" name="last_name"/>
+                                        </div>                                 
+                                        <button type="submit" class="btn btn-primary btn-lg px-4 me-sm-3"> Registrarse</button>                                        
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/vw-golf-r-05-1620312876.jpg" alt="..." /></div>
+                    </div>
+                </div>
+            </header>
+
+{% endblock contenidoQueCambia %}

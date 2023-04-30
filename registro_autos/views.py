@@ -2,8 +2,12 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import *
 from .forms import *
-from django.http import QueryDict
-from urllib.parse import urlencode
+from django.views.generic.edit import DeleteView, UpdateView, CreateView
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView
+from django.contrib.auth.models import User
 
 def inicio(self):
 
@@ -33,21 +37,77 @@ def contacto(self):
 
     return render(self,"contacto.html")
 
-def reserva(request):
+def reserva(self): # Revisar la multiplicidad de guardados
     
-    print('POST data: ', dict(request.POST))
-
-    if request.method == 'POST':
+    if self.method == 'POST':
       
-      miTurno = Formturno(request.POST)
-      if miTurno.is_valid():        
-          data = miTurno.cleaned_data
-          turno = Turno(fecha=data['fecha'], nombre=data['nombre'], apellido=data['apellido'], telefono=data['telefono'], vehiculo=data['vehiculo'], comentario=data['comentario'])
-          turno.save()   
-          return render(request, "confirmaciónTurno.html")   
-      else:          
-          return render(request, "inicio.html", {"mensaje": "Formulario invalido"})    
+        miTurno = Formturno(self.POST)
+        if miTurno.is_valid():        
+            data = miTurno.cleaned_data
+            turno = Turno(fecha=data['fecha'], nombre=data['nombre'], apellido=data['apellido'], email=data['email'], telefono=data['telefono'], vehiculo=data['vehiculo'], comentario=data['comentario'])
+            turno.save()   
+            return render(self, "confirmaTurno.html")   
+        else:          
+            return render(self, "inicio.html", {"mensaje": "Formulario invalido"})    
     else:
-      miTurno = Formturno()
-      return render(request, "reservaturno.html", {"miTurno": miTurno})
+        miTurno = Formturno()
+        return render(self, "reservaturno.html", {"miTurno": miTurno})
+    
+def register(request):
+  
+    if request.method == 'POST':
+        miFormulario = UserCreationForm(request.POST)
 
+        if miFormulario.is_valid():
+            miFormulario.save()
+            return render(request, 'confirmaRegistro.html')
+            
+        else:
+            return render(request, "loginRegistro.html")
+    else:
+        miFormulario = UserCreationForm()
+        return render(request, "loginRegistro.html", {"miFormulario": miFormulario})   
+
+def conf_registro(self):
+
+    return render(self,"confirmaRegistro.html")
+
+def loginView(request):
+   
+    if request.method == 'POST':
+        miFormulario = AuthenticationForm(request, data=request.POST)
+
+        if miFormulario.is_valid():
+            
+            data = miFormulario.cleaned_data
+            usuario = data["username"]
+            psw = data["password"]
+            
+            user = authenticate(username=usuario, password=psw)
+
+            if user:
+                login(request, user)
+                return render(request, 'confirmaLogin.html')
+            
+            else:
+                return render(request, 'novedades.html', {"mensaje": f'Error: datos incorrectos'})
+            
+        else:
+            return render(request, "servicios.html", {"mensaje": "Formulario invalido"})
+    else:
+        miFormulario = AuthenticationForm()
+        return render(request, "loginRegistro.html", {"miFormulario": miFormulario})
+  
+def conf_ingreso(self):
+
+    return render(self,"confirmaLogin.html")
+
+def vista_user(self):
+
+    return render(self,"user.html")
+
+class VistaTurno (LoginRequiredMixin, ListView):
+  
+  model = Turno
+  template_name = 'user.html'
+  context_object_name = 'turno'
