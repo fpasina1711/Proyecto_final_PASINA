@@ -9,6 +9,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+
 
 def inicio(self):
 
@@ -60,7 +62,7 @@ def register(request):
     print('post: ', request.POST)
   
     if request.method == 'POST':
-        miFormulario = UserCreationForm(request.POST)
+        miFormulario = CustomUserCreationForm(request.POST)
 
         if miFormulario.is_valid():
             miFormulario.save()
@@ -69,7 +71,7 @@ def register(request):
         else:
             return render(request, "loginRegistro.html")
     else:
-        miFormulario = UserCreationForm()
+        miFormulario = CustomUserCreationForm()
         return render(request, "loginRegistro.html", {"miFormulario": miFormulario})   
 
 def conf_registro(self):
@@ -107,13 +109,46 @@ def conf_ingreso(self):
     return render(self,"confirmaLogin.html")
 
 @login_required
-def VistaTurno(request):
+def VistaUser(request):
     email = request.user.email
     turnos = Turno.objects.filter(email=email)
-    return render(request, 'user.html', {'turnos': turnos})
+    usuario = User.objects.filter(email=email).first()
+
+    return render(request, 'user.html', {'turnos': turnos, 'usuario': usuario})
 
 class DetalleTurno(DetailView):
 
     model = Turno
     template_name = 'userTurnoDetail.html'
     context_object_name = 'turno'
+
+@login_required
+def editar_perfil(request):
+
+    usuario = request.user
+
+    if request.method == 'POST':
+      
+      miFormulario = UserEditForm(request.POST, instance=request.user)
+
+      if miFormulario.is_valid():
+          data = miFormulario.cleaned_data
+          usuario.email = data['email']
+          usuario.first_name = data['first_name']
+          usuario.last_name = data['last_name']
+          usuario.set_password(data["password1"])
+          usuario.save()
+          
+          return render(request, "inicio.html", {"mensaje": "Datos actualizados!"})
+    
+      else:
+          return render(request, "inicio.html", {"miFormulario": miFormulario})
+    else:
+      miFormulario = UserEditForm(instance=request.user)
+      return render(request, "editauser.html", {"miFormulario": miFormulario})
+
+class Eliminar_turno(DeleteView):
+   
+   model = Turno
+   template_name = 'eliminaUser.html'
+   success_url = '/registro_autos/'

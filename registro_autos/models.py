@@ -11,4 +11,4 @@ class Turno(models.Model):
     comentario = models.CharField(max_length=50)
 
     def __str__(self):
-        return f'{self.fecha} {self.nombre} - {self.apellido} - {self.email} - {self.telefono} - {self.vehiculo} - {self.comentario}'
+        return f'{self.id} - {self.fecha} - {self.nombre} - {self.apellido} - {self.email} - {self.telefono} - {self.vehiculo} - {self.comentario}'

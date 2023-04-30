@@ -4,7 +4,7 @@
 
 {% block contenidoQueCambia %}
             <!-- Header-->
-            <header class="bg-dark py-5" style="height: 80vh; margin: 0;">
+            <header class="bg-dark py-5" style="height: 100vh; margin: 0;">
                 <div class="container px-5">
                     <div class="row gx-5 align-items-center justify-content-center">
                         <div class="col-lg-8 col-xl-7 col-xxl-6">
@@ -13,9 +13,20 @@
                                 <p class="lead fw-normal text-white-50 mb-4">Tus turnos</p>
                                 <ul>
                                 {% for turno in turnos %}
-                                  <li><a href="{% url 'detalleturno' turno.pk %}">{{ turno.fecha }} - {{ turno.nombre }} {{ turno.apellido }}</a></li>
-                                {% endfor %}
-                                </ul>
+                                    <li><a href="{% url 'detalleturno' turno.pk %}">
+                                    {{ turno.fecha }} - {{ turno.nombre }} {{ turno.apellido }}</a></li>
+                                    <div style="display: flex; column-gap: 5px;">
+                                        <button>
+                                            <a href="{% url 'eliminaturno' turno.pk %}">Eliminar</a>
+                                        </button>
+                                {% endfor %}</ul><br><br>
+                                {% block contenidoQueCambia2 %}
+                                <p class="lead fw-normal text-white-50 mb-4">Datos de usuario</p>
+                                <a class="lead fw-normal text-white mb-4">Nombre : {{ usuario.first_name }}</a><br>
+                                <a class="lead fw-normal text-white mb-4">Apellido : {{ usuario.last_name }}</a><br>
+                                <a class="lead fw-normal text-white mb-4">E-mail : {{ usuario.email }}</p>
+                                <a class="btn btn-outline-light btn-sm px-4" href="{% url 'datosedicion' %}">Editar</a>
+                                {% endblock contenidoQueCambia2 %}
                             </div>
                         </div>
                     </div>

@@ -17,7 +17,9 @@ urlpatterns = [
     path('ConfirmaRegistro/', conf_registro, name="confirmaregistro"),
     path('ConfirmaLogin/', conf_ingreso, name="confirmalogin"),
     path('logout/', LogoutView.as_view(template_name='logout.html'), name="logout"),
-    path('vistaturno/', VistaTurno, name="vistaturno"),
+    path('vistauser/', VistaUser, name="vistauser"),
     path('detalleturno/<pk>', DetalleTurno.as_view(), name="detalleturno"),
+    path('datosEdicion/', editar_perfil, name="datosedicion"),
+    path('eliminaTurno/<pk>', Eliminar_turno.as_view(), name="eliminaturno"),
 
 ]
