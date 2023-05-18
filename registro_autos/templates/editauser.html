@@ -10,15 +10,10 @@
                         <div class="col-lg-8 col-xl-7 col-xxl-6">
                             <div class="my-5 text-center text-xl-start">
                                 <p class="lead fw-normal text-black-50 mb-4">Edita tus datos</p>
-                                <ul>
-                                {% for turno in turnos %}
-                                    <li><a href="{% url 'detalleturno' turno.pk %}">
-                                    {{ turno.fecha }} - {{ turno.nombre }} {{ turno.apellido }}</a></li>
-                                {% endfor %}</ul><br><br>
-                                <p class="lead fw-normal text-white-50 mb-4">Datos de usuario</p>
                                 <form method="post">
                                     {% csrf_token %}
-                                    {{ miFormulario.as_p }}
+                                    {{ miFormulario.as_p }}<br>
+                                    Al cambiar su contraseña, su sesión finalizara.<br><br><br><br>
                                     <input type="submit" value="Actualizar">
                                 </form>
                             </div>

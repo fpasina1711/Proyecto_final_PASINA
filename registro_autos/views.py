@@ -4,7 +4,7 @@ from .models import *
 from .forms import *
 from django.views.generic.edit import DeleteView, UpdateView, CreateView
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
@@ -23,6 +23,34 @@ def seleccion_turno(self):
 def servicios(self):
 
     return render(self,"servicios.html")
+
+def Mecanica(request):
+
+    precio=PreciosServicios.objects.last()
+
+    return render(request, 'mecanica.html', {'precio': precio})
+
+
+def Mantenimiento(request):
+
+    precio=PreciosServicios.objects.last()
+
+    return render(request, 'mantenimiento.html', {'precio': precio})
+
+
+
+def Lavado(request):
+
+    precio=PreciosServicios.objects.last()
+    
+    return render(request,"lavado.html", {'precio': precio})
+
+
+def Pintura(request):
+
+    precio=PreciosServicios.objects.last()
+
+    return render(request,"pintura.html", {'precio': precio})
 
 def productos(self):
 
@@ -129,26 +157,28 @@ def editar_perfil(request):
 
     if request.method == 'POST':
       
-      miFormulario = UserEditForm(request.POST, instance=request.user)
+        miFormulario = UserEditForm(request.POST, instance=request.user)
 
-      if miFormulario.is_valid():
-          data = miFormulario.cleaned_data
-          usuario.email = data['email']
-          usuario.first_name = data['first_name']
-          usuario.last_name = data['last_name']
-          usuario.set_password(data["password1"])
-          usuario.save()
-          
-          return render(request, "inicio.html", {"mensaje": "Datos actualizados!"})
-    
-      else:
-          return render(request, "inicio.html", {"miFormulario": miFormulario})
+        if miFormulario.is_valid():
+            data = miFormulario.cleaned_data
+            usuario.email = data['email']
+            usuario.first_name = data['first_name']
+            usuario.last_name = data['last_name']
+            usuario.set_password(data["password1"])
+            usuario.save()
+        
+            logout(request)
+            return render(request, "inicio.html", {"miFormulario": miFormulario})
+            
+  
+        else:
+            return render(request, "inicio.html", {"miFormulario": miFormulario})
     else:
-      miFormulario = UserEditForm(instance=request.user)
-      return render(request, "editauser.html", {"miFormulario": miFormulario})
+        miFormulario = UserEditForm(instance=request.user)
+        return render(request, "editauser.html", {"miFormulario": miFormulario})
 
 class Eliminar_turno(DeleteView):
    
-   model = Turno
-   template_name = 'eliminaUser.html'
-   success_url = '/registro_autos/'
+    model = Turno
+    template_name = 'eliminaTurno.html'
+    success_url = '/registro_autos/vistauser/'

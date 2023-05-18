@@ -1,0 +1,35 @@
+{% extends 'marco.html' %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<section class="py-5" id="features">
+    {% comment %} <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/vw-golf-r-05-1620312876.jpg" alt="..." /></div> {% endcomment %}
+    <div class="container px-5 my-5" style="height: 50vh; margin: 0;">
+        <div class="row gx-5">
+            <div class="col-lg-8">
+                <div class="row gx-5 row-cols-1 row-cols-md-2">
+                    <div class="col mb-5 h-100">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-wrench"></i></div>
+                        <h2 class="h5">Tratamiento de pintura</h2>
+                        <p class="mb-0">En smartLube daremos vida a tu vehículo rejuveneciendo su imagen.
+                            Trataremos la pintura de tu vehículo para dejarla libre de rayaduras, toques, manchas y todo tipo de signos propios del desgaste cotidiano</p><br>
+                        <p class="mb-0">Precio: Desde ${{precio.precio_pintura}}</p>            
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 order-lg-1 text-center"><img class="img-fluid rounded-3 my-5" src="https://www.26thstreetauto.com/Files/Images/Blog/AdobeStock_539321388.jpeg" alt="..." /></div>
+        </div>
+    </div>
+</section>
+
+<style>
+    img[src="https://www.26thstreetauto.com/Files/Images/Blog/AdobeStock_539321388.jpeg"] {
+        width: 400%; /* Ajusta el ancho de la imagen según tus preferencias */
+        max-width: 500px; /* Ajusta el máximo ancho de la imagen según tus preferencias */
+        margin-left: -300px; /* Ajusta el margen izquierdo de la imagen según tus preferencias */
+}
+</style>  
+
+{% endblock contenidoQueCambia %}

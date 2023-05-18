@@ -12,3 +12,10 @@ class Turno(models.Model):
 
     def __str__(self):
         return f'{self.id} - {self.fecha} - {self.nombre} - {self.apellido} - {self.email} - {self.telefono} - {self.vehiculo} - {self.comentario}'
+
+class PreciosServicios(models.Model):
+
+    precio_mecanica = models.IntegerField()
+    precio_mantenimiento = models.IntegerField()
+    precio_lavado = models.IntegerField()
+    precio_pintura = models.IntegerField()

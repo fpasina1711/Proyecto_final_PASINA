@@ -1,0 +1,39 @@
+{% extends 'marco.html' %}
+
+{% load static %}
+
+{% block contenidoQueCambia %}
+
+<section class="py-5" id="features">
+    {% comment %} <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/vw-golf-r-05-1620312876.jpg" alt="..." /></div> {% endcomment %}
+    <div class="container px-5 my-5" style="height: 50vh; margin: 0;">
+        <div class="row gx-5">
+            <div class="col-lg-8">
+                <div class="row gx-5 row-cols-1 row-cols-md-2">
+                    <div class="col mb-5 h-100">
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-wrench"></i></div>
+                        <h2 class="h5">Lavado premium</h2>
+                        <p class="mb-0">Nos importa que su vehículo ademas de estar bien, se vea bien. Ofrecemos una amplia gama de tipos de lavados para su vehículo:</p><br>
+                        <ul class="mb-0">
+                            <li>Nivel 1: Lavado al detalle de carrocería e interior</li>
+                            <li>Nivel 2: Nivel 1 + pulido de carrocería</li>
+                            <li>Nivel 3: Nivel 1 + lavado de motor </li>
+                            <li>Nivel premium: Lavado integro del vehículo</li></ul><br><br>
+                        <p class="mb-0">Precio: Desde ${{precio.precio_lavado}}</p>            
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 order-lg-1 text-center"><img class="img-fluid rounded-3 my-5" src="https://cdn.shopify.com/s/files/1/0304/3386/9883/articles/shutterstock_1612514797_ffeb80cf-73d8-4bf3-be32-cda8f525f041_1200x.jpg?v=1660768210" alt="..." /></div>
+        </div>
+    </div>
+</section>
+
+<style>
+    img[src="https://cdn.shopify.com/s/files/1/0304/3386/9883/articles/shutterstock_1612514797_ffeb80cf-73d8-4bf3-be32-cda8f525f041_1200x.jpg?v=1660768210"] {
+        width: 400%; /* Ajusta el ancho de la imagen según tus preferencias */
+        max-width: 500px; /* Ajusta el máximo ancho de la imagen según tus preferencias */
+        margin-left: -300px; /* Ajusta el margen izquierdo de la imagen según tus preferencias */
+}
+</style>  
+
+{% endblock contenidoQueCambia %}

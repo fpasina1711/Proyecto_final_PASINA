@@ -21,5 +21,9 @@ urlpatterns = [
     path('detalleturno/<pk>', DetalleTurno.as_view(), name="detalleturno"),
     path('datosEdicion/', editar_perfil, name="datosedicion"),
     path('eliminaTurno/<pk>', Eliminar_turno.as_view(), name="eliminaturno"),
-
+    path('MuestraMecanica/', Mecanica, name="detalleMecanica"),
+    path('MuestraMantenimiento/', Mantenimiento, name="detalleMantenimiento"),
+    path('MuestraLavado/', Lavado, name="detalleLavado"),
+    path('MuestraPintura/', Pintura, name="detallePintura"),
+    
 ]
