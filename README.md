@@ -2,16 +2,22 @@ PROYECTO FINAL ---> PASINA
 
 PAGINA WEB PARA LA GESTION DE TURNOS EN UN LUBRICENTRO.
 
-IMPORTANTE: Para ingresar y poder visualizar correctamente la página, iniciar el server desde el puerto 8002 (por alguna razón desde 8000 no se veía bien desde mi pc).
+Para acceder al menu --> http://127.0.0.1:8000/registro_autos/
 
-El proyecto consiste en una página web que permite la creación de reservas para realizar services periódicos en un lubricentro vehicular.
-Desde portal se pueden emitir turnos sin la necesidad de generar/loguease con un usuario.
-El cliente tiene la posibiliad de generar un usuario si lo desea. Una vez logueado, clickeando en el icono ubicado en el extremo superior izquierdo de la pantalla, podrá visualizar sus turnos y cancelarlos de necesitar hacerlo.
-También podrá actualziar sus datos de usuarios.
-Desde la página se podrán ver los diferentes servicios que ofrece el local ademas del servicio de mantenimiento periódico (en desarrollo).
-Tambíen se podrán ver las novedades y los diferentes tipos de productos ofrecidos, todo desde la barra de navegación en la parte superior de la pantalla (en desarrollo)
+Sobre el proyecto:
+Consiste en una página web que permite la creación y gestión de turnos para acceder a una gama de servicios ofrecidos por un centro de atención vehícular.
+El usuario puede crear una reserva sin la necesidad de tener usuario. En caso de querer gestionar dicha reserva, podrá crear una cuenta y, desde la interface de usuario,
+visualizar los detalles. También podrá eliminar sus turnos.
+Desde la barra de navegación de la página se podrá acceder a diferentes enlaces, entre los que encotraresmo:
+- Servicios: Podremos ver información preliminar de los servicios ofrecidos. Presionando en "mas info" podremos ver mas detalles al respecto, como un precio precio estimado
+para orientar al cliente sobre los valores de los trabajos. Dicho valor puede ser editado desde el administrador. A futuro voy a implementar un listado mas completo precios.
+- Prodcutos (Template a desarrolar): Proximamente
+- Tunos: En este template tendremos un form mediante el cual podremos reservar un turno simplemente cargando la información requerida. En el último campo podremos seleccionar
+el tipo de servicio deseado.
+- Novedades (Template a desarrolar): Proximamente
+- Sobre Nosotros: Se detalla sobre el negocio y los objetivos de la página.
+- Contacto: Datos relacionados canales de contactos.
+- Login / Logout: Se podrá ingresar a su cuenta o finalizar sesión.
 
-Requisitos pendientes de desarrollar:
-- sección admin desde la que se pueda generar CRUD de todas las operaciones de la pagina: gestion de usuarios, turnos, actualziación de productos.
-- Video explicativo de la página
+
 
